@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Digit Recognizer</title>
+</head>
+
+<body style="text-align:center; font-family:sans-serif;">
+
+<h2>Draw Digit (0-9)</h2>
+
+<canvas id="canvas" width="200" height="200" style="border:2px solid black;"></canvas>
+<br><br>
+
+<button onclick="predict()">Predict</button>
+<button onclick="clearCanvas()">Clear</button>
+
+<h3 id="result">Prediction: ?</h3>
+
+<script>
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+
+let drawing = false;
+
+canvas.onmousedown = () => drawing = true;
+canvas.onmouseup = () => drawing = false;
+canvas.onmousemove = draw;
+
+function draw(e) {
+    if (!drawing) return;
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(e.offsetX, e.offsetY, 8, 0, Math.PI*2);
+    ctx.fill();
+}
+
+function clearCanvas() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+
+function predict() {
+    // Fake prediction (random for now)
+    let num = Math.floor(Math.random() * 10);
+    document.getElementById("result").innerText = "Prediction: " + num;
+}
+</script>
+
+</body>
+</html>
